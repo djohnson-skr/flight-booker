@@ -10,33 +10,66 @@ Airport.delete_all
 airports = Airport.create!([
   { 
     name: "Philadelphia International Airport",
-    code: "PHL"
+    code: "PHL",
+    location: "Philadelphia"
   },
 
   { 
     name: "Salt Lake City International Airport",
-    code: "SLC"
+    code: "SLC",
+    location: "Salt Lake City"
   },
 
   { 
     name: "Denver International Airport",
-    code: "DEN"
+    code: "DEN",
+    location: "Denver"
   },
 
   { 
     name: "Seattle-Tacoma International Airport",
-    code: "SEA"
+    code: "SEA",
+    location: "Seattle"
+  },
+
+  { 
+    name: "Newark Liberty International Airport",
+    code: "EWR",
+    location: "Newark"
+  },
+
+  { 
+    name: "Munich International Airport",
+    code: "MUC",
+    location: "Munich"
+  },
+
+  { 
+    name: "Stockholm Arlanda Airport",
+    code: "ARN",
+    location: "Stockholm"
   }
+
 ])
 
 Flight.delete_all
 
-flights = Flight.create!([
-  { 
-    date: DateTime.new(2022,3,2,10,0,0),
-    flight_duration: 7,
-    departure_airport: Airport.first,
-    arrival_airport: Airport.second
-  }
-])
+dates = (Date.today..(Date.today + 1.month)).to_a
+airports = Airport.all
 
+airports.each do |arrival|
+  airports.each do |departure|
+    next if arrival.id == departure.id
+
+    dates.each do |d|
+      rand(1..3).times do
+        Flight.create!(
+          date: DateTime.new(d.year, d.month, d.day, rand(1..23), rand(1..59)),
+          departure_airport: departure,
+          arrival_airport: arrival,
+          flight_duration: 7
+        )
+      end
+    end
+  end
+end
