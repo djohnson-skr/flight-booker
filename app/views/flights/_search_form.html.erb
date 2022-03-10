@@ -1,0 +1,27 @@
+<%= form_with url: "flights", method: :get do |f| %>
+  <div>
+    <%= f.label("Departure:") %>
+    <%# use selected to keep the information in the field after hitting search flights %>
+    <%= f.select(:departure_airport_id, options_for_select(@airports, selected: params[:departure_airport_id]), { prompt: "Select Airport"}, required: true) %>
+  </div>
+
+  <div>
+    <%= f.label("Arrival:") %>
+    <%= f.select(:arrival_airport_id, options_for_select(@airports, selected: params[:arrival_airport_id]), { prompt: "Select Airport"}, required: true) %>
+  </div>
+
+  <div>
+    <%= f.label("Passengers") %>
+    <%= f.select(:passenger_count, options_for_select([1,2,3,4], selected: params[:passenger_count]), required: true) %>
+  </div>
+
+  <div>
+    <%= f.label("Date") %>
+    <%# can pass the value: option since there is just one date field, can not pass value: to select since it is a dropdown %>
+    <%= f.date_field(:departure_date, value: params[:departure_date], required: true) %>
+  </div>
+
+  <div>
+    <%= f.submit "Search Flights" %>
+  </div>
+<% end %>

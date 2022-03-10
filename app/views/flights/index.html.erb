@@ -1,0 +1,13 @@
+<h1>Show All Flights</h1>
+
+<%= render "search_form" %>
+
+<% unless @available_flights.nil?%>  <%# protect against inital page load where @available_flights is nil (nil.each fails ofc) %>
+  <% if @available_flights.any? %>  <%# check to see if the Associated Record returns all flight objects %>
+    <%= render "search_results_form" %>
+  <% else %>
+    <h3>No flights available</h3>
+  <% end %>
+<% end %>
+
+
