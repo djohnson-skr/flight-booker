@@ -1,0 +1,19 @@
+<h1>Please fill out the details below</h1>
+
+
+
+<%= form_with(model: @booking) do |booking_builder| %>
+  <%= booking_builder.hidden_field(:flight_id, :value => params[:flight]) %>
+  Passenger(s):
+  <ul>
+    <%= booking_builder.fields_for :passengers do |passenger_builder| %>
+      <li>
+        <%= passenger_builder.label("Passenger Name") %>
+        <%= passenger_builder.text_field(:name, placeholder: "Full name", required: true) %>
+        <%= passenger_builder.label("Email") %>
+        <%= passenger_builder.email_field(:email, placeholder: "example@xyz.com", required: true) %>
+      </li>
+    <% end %>
+  <div><%= booking_builder.submit("Confirm purchase") %></div>
+  </ul>
+<% end %>

@@ -4,7 +4,7 @@
       <%= f.radio_button(:flight, flight.id) %>
       <%= f.label(:flight, "#{flight.date.hour}:#{flight.date.min} departure from #{flight.departure_airport.code} to #{flight.arrival_airport.code}") %>
     </div>
-  <%= f.hidden_field(:passenger_count, :value => params[:passenger_count]) %>
   <% end %>
+  <%= f.hidden_field(:passenger_count, :value => params[:passenger_count]) %>
   <%= f.submit("Book it!") %>
 <% end %>
