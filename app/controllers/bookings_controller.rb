@@ -5,7 +5,6 @@ class BookingsController < ApplicationController
   end
   
   def new
-    #binding.pry
     @booking = Booking.new
     @flight = Flight.find(params[:flight])
     params[:passenger_count].to_i.times { @booking.passengers.build }

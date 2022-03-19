@@ -1,6 +1,8 @@
-<h1>Please fill out the details below</h1>
 
-
+<% date = "#{@flight.date.month}/#{@flight.date.day}"%>
+<% time = "#{@flight.date.hour}:#{@flight.date.min} UTC" %>
+<h2><%= "#{@flight.arrival_airport.name} to #{@flight.departure_airport.name} on #{date} at #{time}" %></h2>
+<h3>Enter passenger details below:</h3>
 
 <%= form_with(model: @booking) do |booking_builder| %>
   <%= booking_builder.hidden_field(:flight_id, :value => params[:flight]) %>
@@ -14,6 +16,6 @@
         <%= passenger_builder.email_field(:email, placeholder: "example@xyz.com", required: true) %>
       </li>
     <% end %>
-  <div><%= booking_builder.submit("Confirm purchase") %></div>
+  <div><%= booking_builder.submit("Confirm booking") %></div>
   </ul>
 <% end %>
